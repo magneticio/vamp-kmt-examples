@@ -1,0 +1,23 @@
+{
+    "name": "sava-product",
+    "image": "vampio/sava-product",
+    "labels": [
+      {
+        "app": "<name>",
+        "version": "<tag>"
+      }
+    ],
+    "ports": [
+      8080
+    ],
+    "versions": [
+      {
+        "tag": "1.0.3",
+        "dependencies": []
+      },
+      {
+        "tag": "2.0.1",
+        "dependencies": []
+      }
+    ]
+  }

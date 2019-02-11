@@ -1,0 +1,63 @@
+{
+    "environment": {
+      "name": "vampio-tutorial5-eu",
+      "vamp": "vampio-tutorial5-eu",
+      "kubernetes": {
+        "context": "",
+        "namespace": "eu",
+        "cluster": ""
+      }
+    },
+    "services": [
+      {
+        "name": "sava-cart",
+        "version": "*",
+        "port": 9080,
+        "virtual_hosts": [
+        ],
+        "environment_variables": {
+        },
+        "replicas": 2,
+        "resources": {
+        },
+        "labels": {
+        },
+        "vamp": {
+          "name": "<name>",
+          "gateway": {
+            "selector": {
+              "type": "label",
+              "discriminator": "version"
+            },
+            "policy": {
+            }
+          }
+        }
+      },
+      {
+        "name": "sava-product",
+        "version": "*",
+        "port": 9070,
+        "virtual_hosts": [
+        ],
+        "environment_variables": {
+        },
+        "replicas": 1,
+        "resources": {
+        },
+        "labels": {
+        },
+        "vamp": {
+          "name": "<name>",
+          "gateway": {
+            "selector": {
+              "type": "label",
+              "discriminator": "version"
+            },
+            "policy": {
+            }
+          }
+        }
+      }
+    ]
+  }

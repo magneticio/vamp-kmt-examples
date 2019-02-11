@@ -1,0 +1,49 @@
+{
+    "name": "sava-cart",
+    "image": "vampio/sava-cart",
+    "labels": [
+      {
+        "app": "<name>",
+        "version": "<tag>",
+        "locale": "<locale>"
+      }
+    ],
+    "ports": [
+      3000
+    ],
+    "environment_variables": [
+      "LOCALE"
+    ],
+    "versions": [
+      {
+        "tag": "1.0.5",
+        "dependencies": [
+          {
+            "name": "sava-product",
+            "version": "^1.x"
+          }
+        ],
+        "environment_variables": []
+      },
+      {
+        "tag": "2.0.1",
+        "dependencies": [
+          {
+            "name": "sava-product",
+            "version": "^2.x"
+          }
+        ],
+        "environment_variables": []
+      },
+      {
+        "tag": "2.0.3",
+        "dependencies": [
+          {
+            "name": "sava-product",
+            "version": "^2.x"
+          }
+        ],
+        "environment_variables": []
+      }
+    ]
+  }
