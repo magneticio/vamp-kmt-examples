@@ -61,22 +61,14 @@ def read_json(service_definition_file_path):
 
 
 def update_version(json, tag):
+    if None == json.get('versions') or len(json['versions']) == 0:
+        json['versions'] = [{'tag': tag, 'dependencies': []}]
+        return json
+
     versions = json['versions']
-    if versions == None:
-        versions = {'versions': [{'tag': tag, 'dependencies': []}]}
-        return json
-    if len(versions) == 0:
-        versions.append({'tag': tag, 'dependencies': []})
-        return json
     if any(entry['tag'] != None and entry['tag'] == tag for entry in versions):
         return json
-    if len(versions) == 1:
-        current_version = versions[0]
-        new_version = current_version.copy()
-        new_version['tag'] = tag
-        versions.append(new_version)
-        return json
-    if len(versions) > 1:
+    if len(versions) > 0:
         latest_version = search_latest_version(versions, tag)
         new_version = latest_version.copy()
         new_version['tag'] = tag
