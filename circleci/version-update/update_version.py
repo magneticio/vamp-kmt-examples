@@ -65,12 +65,13 @@ def update_version(json, tag):
 
     versions = json['versions']
     if any(entry['tag'] != None and entry['tag'] == tag for entry in versions):
+        print('Tag already exists')
         return json
     if len(versions) > 0:
-        latest_version = search_latest_version(versions, tag)
+        index, latest_version = search_latest_version(versions, tag)
         new_version = latest_version.copy()
         new_version['tag'] = tag
-        versions.append(new_version)
+        versions.insert(index, new_version)
         return json
 
 
@@ -80,13 +81,21 @@ def search_latest_version(versions, tag):
     def get_tag(e):
         return e['tag']
 
-    versions_copy.sort(reverse=True, key=get_tag)
-    latest_version = versions_copy[0]
-    latest_version_tag = latest_version['tag']
-    if latest_version_tag > tag:
-        print('Later version ({}) already exists'.format(latest_version_tag))
-        sys.exit(1)
-    return latest_version
+    versions_copy.sort(key=get_tag)
+
+    latest_version = None
+    index = 0
+    for current_version in versions_copy:
+        if current_version['tag'] < tag:
+            latest_version = current_version
+            index += 1
+            continue
+        break
+
+    if None == latest_version:
+        return index, {'tag': tag, 'dependencies': []}
+
+    return index, latest_version
 
 
 def save_updated_json(service_definition_file_path, updated_json):
